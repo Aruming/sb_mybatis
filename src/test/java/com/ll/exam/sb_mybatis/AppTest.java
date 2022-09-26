@@ -36,4 +36,17 @@ class AppTest {
         Article article = articleService.getArticleById(2L);
         assertThat(article).isNotNull();
     }
+
+    @Test
+    @DisplayName("게시물 제목 검색")
+    void t4() {
+        List<Article> articles = articleService.search("subject", "1");
+        assertThat(articles.size()).isEqualTo(1);
+
+        articles = articleService.search("subject", "제목");
+        assertThat(articles.size()).isEqualTo(2);
+
+        articles = articleService.search("subject", "2");
+        assertThat(articles.size()).isEqualTo(1);
+    }
 }
