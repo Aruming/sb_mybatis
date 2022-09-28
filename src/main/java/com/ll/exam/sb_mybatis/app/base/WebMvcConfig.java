@@ -1,6 +1,7 @@
 package com.ll.exam.sb_mybatis.app.base;
 
 import com.ll.exam.sb_mybatis.app.app.interceptor.BeforeActionInterceptor;
+import com.ll.exam.sb_mybatis.app.app.interceptor.NeedToLoginInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 public class WebMvcConfig implements WebMvcConfigurer {
     private final BeforeActionInterceptor beforeActionInterceptor;
+    private final NeedToLoginInterceptor needToLoginInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -23,5 +25,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         ir.excludePathPatterns("/resource/**");
         ir.excludePathPatterns("/gen/**");
         ir.excludePathPatterns("/error");
+
+        ir = registry.addInterceptor(needToLoginInterceptor);
+        ir.addPathPatterns("/article/write");
     }
 }
