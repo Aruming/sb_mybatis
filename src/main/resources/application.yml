@@ -7,3 +7,6 @@ spring:
     url: jdbc:mariadb://127.0.0.1:3306/sb_mybatis?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
     username: Aruming
     password: Aruming
+logging:
+  level:
+    com.ll.exam.sb_mybatis: debug
