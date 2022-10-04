@@ -31,7 +31,7 @@ public class ArticleController {
 
     @GetMapping("/write")
     public String showList(Model model) {
-        List<Article> articles = articleService.getArticles();
+        List<Article> articles = articleService.getForPrintArticles();
 
         log.debug("articles : " + articles);
 
