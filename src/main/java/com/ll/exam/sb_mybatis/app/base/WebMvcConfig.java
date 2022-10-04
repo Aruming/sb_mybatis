@@ -1,6 +1,7 @@
 package com.ll.exam.sb_mybatis.app.base;
 
 import com.ll.exam.sb_mybatis.app.app.interceptor.BeforeActionInterceptor;
+import com.ll.exam.sb_mybatis.app.app.interceptor.NeedToAdminInterceptor;
 import com.ll.exam.sb_mybatis.app.app.interceptor.NeedToLoginInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer {
     private final BeforeActionInterceptor beforeActionInterceptor;
     private final NeedToLoginInterceptor needToLoginInterceptor;
+    private final NeedToAdminInterceptor needToAdminInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -29,5 +31,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         ir = registry.addInterceptor(needToLoginInterceptor);
         ir.addPathPatterns("/article/write");
         ir.addPathPatterns("/member/me");
+
+        ir = registry.addInterceptor(needToAdminInterceptor);
+        ir.addPathPatterns("/adm/**");
     }
 }
